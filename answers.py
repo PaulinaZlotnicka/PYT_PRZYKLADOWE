@@ -5,7 +5,7 @@
 
 import random
 from flask import Flask, request
-from my_phonebook import pb
+
 
 #zadanie 4
 def revers_sentence(text):
@@ -89,7 +89,7 @@ print(get_random_elements([1,2,6,3,7],16)) # Wyjątek!
 
 #zadanie 8
 app = Flask(__name__)
-
+from my_phonebook import pb
 
 def file_as_string(file_path):
     buff = ""
@@ -113,8 +113,8 @@ def checker(user_in):
         for key in pb_line:
             if user_in in pb_line[key]:
                 cont += "{}: {} \n".format(pb_line["nickname"], pb_line["number"])
-            else:
-                cont = "brak danych"
+    if cont == '':
+        cont += "nie ma w książce"
     return build_web_page(cont)
 
 @app.route("/pbk")
@@ -133,7 +133,7 @@ def task8_post():
         elif number_given != '':
             return checker(number_given)
     else:
-        return "brak danych"
+        return "nic nie wpisałeś"
 
 
 if __name__ == "__main__":
