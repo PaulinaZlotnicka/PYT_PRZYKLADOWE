@@ -112,7 +112,9 @@ def checker(user_in):
     for pb_line in pb:
         for key in pb_line:
             if user_in in pb_line[key]:
-                cont = "{}: {}".format(pb_line["nickname"], pb_line["number"])
+                cont += "{}: {} \n".format(pb_line["nickname"], pb_line["number"])
+            else:
+                cont = "brak danych"
     return build_web_page(cont)
 
 @app.route("/pbk")
